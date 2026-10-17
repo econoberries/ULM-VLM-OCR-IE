@@ -1,0 +1,53 @@
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environment and editor files
+.vscode/
+.env
+.env.*
+!.env.example
+
+# Model weights and checkpoints
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.gguf
+*.onnx
+*.model
+checkpoints/
+**/checkpoints/
+checkpoint-*/
+models/
+**/models/
+
+# Hugging Face and other model caches
+.cache/huggingface/
+**/.cache/huggingface/
+**/hub/
+
+# Full OCRBench v2 download (never commit)
+/data/OCRBench_v2/
+OCRBench_v2.zip
+
+# Local smoke-test contents; keep only the folder placeholder
+/data/smoke_test/*
+!/data/smoke_test/.gitkeep
+/src/evaluation/make_smoke_test.py
+
+# Temporary outputs and logs
+tmp/
+temp/
+logs/
+*.log
+*.out
+*.err
+*.tmp
