@@ -1,6 +1,6 @@
 """
-MiniCPM-V-4.6 settings, model loading and single-image inference.
-Used by run_one_record.py and run.py.
+MiniCPM-V-4.6 settings, model loading, single-image inference and timing/memory measurement.
+Used by run_one_record.py and run.py; summarize results with src/vlm/qwen35/summarize.py.
 
 References
 1. HF-CARD, MiniCPM-V-4.6 model card: https://huggingface.co/openbmb/MiniCPM-V-4.6/blob/36f34a661a4bd35d0dc2294cb044d2584646c7d3/README.md
@@ -10,11 +10,15 @@ References
 5. OCRB, OCRBench inference example: https://github.com/Yuliang-Liu/MultimodalOCR/blob/4e363b3f499811b43d792ef0bb33932ef05eca27/OCRBench/example.py
 6. OCRB2, OCRBench v2 evaluator: https://github.com/Yuliang-Liu/MultimodalOCR/blob/4e363b3f499811b43d792ef0bb33932ef05eca27/OCRBench_v2/eval_scripts/eval.py
 7. TF, Transformers 5.19 processor API: https://github.com/huggingface/transformers/blob/v5.19.0/src/transformers/processing_utils.py
+8. QWEN-RUN, Qwen3.5 inference script: src/vlm/qwen35/run.py, branch feature/qwen35-english-kie, commit 969c420
 """
 
 import logging
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 
+import torch
 from PIL import Image
 from transformers import AutoModelForImageTextToText, AutoProcessor, set_seed
 
@@ -131,3 +135,40 @@ def run_inference(model, processor, image_path, question, max_new_tokens=MAX_NEW
     # OCRB2, lines 241-245
     # eval.py parses it
     return output_text[0], len(generated_ids_trimmed[0])
+
+
+# ---------------------------------------------------------------------------
+# Timing and GPU memory, defined as in the Qwen3.5 run
+# ---------------------------------------------------------------------------
+# QWEN-RUN, lines 69-72
+def _synchronize_cuda():
+    for i in range(torch.cuda.device_count()):
+        torch.cuda.synchronize(i)
+
+
+# QWEN-RUN, lines 87-90
+def start_sample_timer():
+    """Reset GPU peak memory and start the clock."""
+    for i in range(torch.cuda.device_count()):
+        torch.cuda.reset_peak_memory_stats(i)
+    _synchronize_cuda()
+    return time.perf_counter()
+
+
+# QWEN-RUN, lines 75-78, 97-98, 197
+def stop_sample_timer(start):
+    """Return (inference_seconds, peak_allocated_gpu_bytes); empty GPU list on CPU."""
+    _synchronize_cuda()
+    seconds = round(time.perf_counter() - start, 4)
+    peak = [int(torch.cuda.max_memory_allocated(i)) for i in range(torch.cuda.device_count())]
+    return seconds, peak
+
+
+# QWEN-RUN, lines 180-182
+def environment_info():
+    """Run-level environment fields."""
+    return {
+        "started_utc": datetime.now(timezone.utc).isoformat(),
+        "torch_version": torch.__version__,
+        "cuda_device_names": [torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())],
+    }

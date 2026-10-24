@@ -54,3 +54,6 @@ logs/
 # MiniCPM test runs (smoke file, single record); full-run results are committed
 /results/minicpm/kie_en_smoke10_*
 /results/minicpm/single_id*
+
+# Local copy kept until the shared summary_all.py replaces it
+/src/vlm/minicpm/efficiency.py

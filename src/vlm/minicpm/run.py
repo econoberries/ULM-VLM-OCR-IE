@@ -14,8 +14,17 @@ import time
 from argparse import ArgumentParser
 from pathlib import Path
 
-from efficiency import environment_info, start_sample_timer, stop_sample_timer
-from minicpm_utils import DEFAULT_OUTPUT_FOLDER, MODEL_ID, MODEL_REVISION, load_model, run_inference, run_metadata
+from minicpm_utils import (
+    DEFAULT_OUTPUT_FOLDER,
+    MODEL_ID,
+    MODEL_REVISION,
+    environment_info,
+    load_model,
+    run_inference,
+    run_metadata,
+    start_sample_timer,
+    stop_sample_timer,
+)
 from ocrbench_utils import (
     DEFAULT_IMAGE_FOLDER,
     DEFAULT_INPUT_FILE,
