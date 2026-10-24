@@ -25,9 +25,12 @@ sbatch slurm/vlm/minicpm_kie.sbatch
 
 The full run uses only `"key information extraction en"` records and can resume from completed predictions.
 
-Summary (mean F1 and time), with the team's shared script, on the file scored by the official `eval.py`:
+Summary (F1, time, GPU memory) with the team's shared script, on the file scored by the official `eval.py`:
 
 ```bash
-uv run python src/vlm/qwen35/summarize.py --input results/minicpm/OCRBench_v2_minicpm_v46_scored.json
+uv run python src/evaluation/summarize_all.py \
+    --input results/minicpm/OCRBench_v2_minicpm_v46_scored.json \
+    --metadata results/minicpm/OCRBench_v2_minicpm_v46.run_metadata.json \
+    --output results/minicpm/OCRBench_v2_minicpm_v46_summary.json
 ```
 
