@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=qwen35-9b-kie
+#SBATCH --job-name=qwen3.5-9b_ocr_kie
+#SBATCH --partition=gpu_a100_il
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=4
+#SBATCH --gres=gpu:A100:1
 #SBATCH --mem=64G
-#SBATCH --time=04:00:00
+#SBATCH --time=00:30:00
 #SBATCH --output=%x-%j.out
-# TEMPLATE: Confirm cluster account, partition, GPU type and CUDA compatibility.
+
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 export TOKENIZERS_PARALLELISM=false
