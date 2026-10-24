@@ -51,3 +51,6 @@ logs/
 *.out
 *.err
 *.tmp
+# MiniCPM test runs (smoke file, single record); full-run results are committed
+/results/minicpm/kie_en_smoke10_*
+/results/minicpm/single_id*
