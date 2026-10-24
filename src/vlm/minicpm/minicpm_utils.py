@@ -1,6 +1,6 @@
 """
 MiniCPM-V-4.6 settings, model loading, single-image inference and timing/memory measurement.
-Used by run_one_record.py and run.py; summarize results with src/vlm/qwen35/summarize.py.
+Used by run_one_record.py and run.py; summarize results with src/evaluation/summarize_all.py.
 
 References
 1. HF-CARD, MiniCPM-V-4.6 model card: https://huggingface.co/openbmb/MiniCPM-V-4.6/blob/36f34a661a4bd35d0dc2294cb044d2584646c7d3/README.md
