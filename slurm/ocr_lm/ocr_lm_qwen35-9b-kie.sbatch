@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=qwen3.5-9b_ocr_kie
-#SBATCH --partition=gpu_a100_il
+#SBATCH --partition=gpu-single
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gres=gpu:A100:1
 #SBATCH --mem=64G
-#SBATCH --time=00:30:00
+#SBATCH --time=02:00:00
 #SBATCH --output=%x-%j.out
 
 set -euo pipefail
