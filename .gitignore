@@ -38,9 +38,8 @@ models/
 /data/OCRBench_v2/
 OCRBench_v2.zip
 
-# Local smoke-test contents; keep only the folder placeholder
-/data/smoke_test/*
-!/data/smoke_test/.gitkeep
+# Local smoke-test data and script (never commit)
+/data/smoke_test/
 /src/evaluation/make_smoke_test.py
 
 # Temporary outputs and logs
