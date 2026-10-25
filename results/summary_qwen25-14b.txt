@@ -1,0 +1,14 @@
+{
+  "samples": 400,
+  "failures": 0,
+  "timed_samples": 400,
+  "mean_inference_seconds": 3.287278,
+  "median_inference_seconds": 3.0422000000000002,
+  "official_scored_samples": 400,
+  "mean_official_kie_f1": 0.6974338784173343,
+  "mean_peak_allocated_gpu_gib": 27.66811514377594,
+  "max_peak_allocated_gpu_gib": 27.958738327026367,
+  "gpu_names": [
+    "NVIDIA A100-SXM4-40GB"
+  ]
+}

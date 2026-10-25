@@ -6,10 +6,10 @@
   "max_new_tokens": 384,
   "enable_thinking": false,
   "do_sample": false,
-  "model_load_seconds": 30.957,
-  "started_utc": "2026-10-23T22:02:02.115308+00:00",
+  "model_load_seconds": 178.655,
+  "started_utc": "2026-10-25T11:03:38.725616+00:00",
   "torch_version": "2.14.1+cu126",
   "cuda_device_names": [
-    "NVIDIA H100"
+    "NVIDIA A100-SXM4-80GB"
   ]
 }
