@@ -7,18 +7,19 @@
     "num_predicted": 400,
     "failed_ids": [],
     "output_file": "/gpfs/bwfor/home/tu/tu_tu/tu_zxoxe66/ULM/ULM-VLM-OCR-IE/results/minicpm/OCRBench_v2_minicpm_v46.json",
-    "model_load_seconds": 9.409,
-    "started_utc": "2026-10-24T01:41:49.332996+00:00",
+    "model_load_seconds": 16.903,
+    "started_utc": "2026-10-25T16:47:19.399361+00:00",
     "torch_version": "2.14.1+cu126",
     "cuda_device_names": [
-        "NVIDIA A100-SXM4-40GB"
+        "NVIDIA A100-SXM4-80GB"
     ],
     "device": "cuda:0",
     "dtype": "torch.bfloat16",
     "inference_settings": {
         "downsample_mode": "16x",
         "max_slice_nums": 36,
-        "max_new_tokens": 512,
+        "max_new_tokens": 384,
+        "prompt_suffix": "\nReturn only a JSON object mapping each requested key to its extracted string value. Do not invent values or include commentary, reasoning, or Markdown.",
         "do_sample": false,
         "num_beams": 1,
         "enable_thinking": false,
