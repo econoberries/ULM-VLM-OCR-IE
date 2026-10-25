@@ -57,7 +57,6 @@ def _get_args():
 
 
 def setup_logging(log_file):
-    # Console + <output>.log (git-ignored).
     Path(log_file).parent.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
         level=logging.INFO,
@@ -76,7 +75,7 @@ def main():
     logger.info(f"{len(kie_data)} of {len(data)} rows in {args.input_file} have type {KIE_TYPE!r}")
 
     # OCRB, lines 92-96
-    # Resume, matched by `id`.
+    # Resume, matched by id
     done = load_done_predictions(args.output_file)
     if done:
         logger.info(f"{args.output_file} exists: {len(done)} rows already have a prediction and are skipped")
@@ -85,7 +84,7 @@ def main():
     errors = []
     model = None
     if any(item["id"] not in done for item in kie_data):
-        # Load once, outside the loop.
+        # Load once, outside the loop
         load_start = time.perf_counter()
         model, processor = load_model(args.model_path, args.revision)
         load_seconds = round(time.perf_counter() - load_start, 3)
@@ -114,7 +113,7 @@ def main():
                 continue
 
             # OCRB, line 84
-            # Copy, so the input data stays unchanged.
+            # Copy
             output_record = copy.deepcopy(record)
             output_record["predict"] = response
             output_record.update(inference_seconds=seconds, peak_allocated_gpu_bytes=peak, output_tokens=n_tokens)
@@ -122,17 +121,19 @@ def main():
             results.append(output_record)
             # Save after every record.
             save_json(results, args.output_file)
+        # Skipped rows after the last new prediction
+        save_json(results, args.output_file)
     else:
         logger.info("Nothing left to predict.")
 
     if not errors:
-        # Stale errors file from an earlier run.
+        # Stale errors file from an earlier run
         errors_file.unlink(missing_ok=True)
 
     # Re-read the output; check every KIE record.
     failed_ids = validate_predictions(kie_data, args.output_file)
 
-    # Metadata only for a run that loaded the model.
+    # Metadata only for a run that loaded the model
     if model is not None:
         save_json(run_metadata(model, args.model_path, args.revision, input_file=args.input_file,
                                image_folder=args.image_folder, num_examples=len(kie_data),

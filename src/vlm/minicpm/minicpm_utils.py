@@ -1,6 +1,6 @@
 """
 MiniCPM-V-4.6 settings, model loading, inference, timing and GPU memory.
-Used by run_one_record.py and run.py; summarize results with src/evaluation/summarize_all.py.
+Used by run_one_record.py and run.py
 
 References
 1. HF-CARD, MiniCPM-V-4.6 model card: https://huggingface.co/openbmb/MiniCPM-V-4.6/blob/36f34a661a4bd35d0dc2294cb044d2584646c7d3/README.md
@@ -29,29 +29,29 @@ DEFAULT_OUTPUT_FOLDER = Path(__file__).resolve().parents[3] / "results" / "minic
 
 # ---------------------------------------------------------------------------
 # Model and inference settings
-# ---------------------------------------------------------------------------
 # HF-CARD, line 125
 MODEL_ID = "openbmb/MiniCPM-V-4.6"
 # https://huggingface.co/openbmb/MiniCPM-V-4.6/commits/main
 MODEL_REVISION = "36f34a661a4bd35d0dc2294cb044d2584646c7d3"
 
-# HF-CARD, lines 155-161, 215-216; MCPV-DOC, lines 141-147
+# HF-CARD, lines 155-161, 215-216
+# MCPV-DOC, lines 141-147
 # Image settings untuned
 DOWNSAMPLE_MODE = "16x"
 MAX_SLICE_NUMS = 36
 
 # QWEN, line 111
-# Same limit as the other pipelines (HF-CARD, line 164 uses 512)
+# same limit as the other pipelines (HF-CARD, line 164 uses 512)
 MAX_NEW_TOKENS = 384
 
 # QWEN, lines 17-20
-# Same instruction as the other pipelines, appended to the OCRBench question
+# same instruction as the other pipelines
 SUFFIX = (
     "\nReturn only a JSON object mapping each requested key to its extracted string value. "
     "Do not invent values or include commentary, reasoning, or Markdown."
 )
 
-# Fixed seed
+# fixed seed
 SEED = 0
 
 
@@ -97,7 +97,6 @@ def run_inference(model, processor, image_path, question, max_new_tokens=MAX_NEW
     image = Image.open(image_path).convert("RGB")
 
     # HF-CARD, lines 145-153; QWEN, line 85
-    # Image first, then OCRBench question + SUFFIX
     messages = [
         {
             "role": "user",
@@ -147,8 +146,7 @@ def run_inference(model, processor, image_path, question, max_new_tokens=MAX_NEW
 
 
 # ---------------------------------------------------------------------------
-# Timing and GPU memory, defined as in the Qwen3.5 run
-# ---------------------------------------------------------------------------
+# Timing and GPU memory
 # QWEN, lines 69-72
 def _synchronize_cuda():
     for i in range(torch.cuda.device_count()):
