@@ -12,7 +12,7 @@
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 export TOKENIZERS_PARALLELISM=false
-uv run python scripts/run_ocr-lm_qwen25Instruct.py \
+uv run python src/ocr_lm/run_ocr-lm_qwen25Instruct.py \
 --input data/english_kie.json \
 --dataset-root . \
 --output results/ocr_qwen25-14b-INSTRUCT-kie.json

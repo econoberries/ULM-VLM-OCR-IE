@@ -20,6 +20,6 @@ uv sync
 uv pip install paddlepaddle-gpu -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
 uv pip install paddleocr
 
-uv run python scripts/ocr.py \
+uv run python src/ocr_lm/ocr.py \
 --input_dir data/OCRBench_v2/EN_part \
 --output_dir data/ocr_output

@@ -1,7 +1,7 @@
 """Select reproducible OCRBench v2 English KIE examples without editing source data."""
 
 """
-uv run python scripts/prepare_kie_ocr.py \
+uv run python src/ocr_lm/prepare_kie_ocr.py \
   --input data/OCRBench_v2/OCRBench_v2.json \
   --output data/english_kie.json
 """

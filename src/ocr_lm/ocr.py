@@ -13,7 +13,7 @@ import statistics
 import argparse
 
 """
-uv run python scripts/ocr.py --input_dir data/OCRBench_v2/EN_part --output_dir data/ocr_output
+uv run python src/ocr_lm/ocr.py --input_dir data/OCRBench_v2/EN_part --output_dir data/ocr_output
 """
 
 
