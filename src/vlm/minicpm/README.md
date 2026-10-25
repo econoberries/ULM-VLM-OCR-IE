@@ -31,6 +31,6 @@ Summary (F1, time, GPU memory) with the team's shared script, on the file scored
 uv run python src/evaluation/summarize_all.py \
     --input results/minicpm/OCRBench_v2_minicpm_v46_scored.json \
     --metadata results/minicpm/OCRBench_v2_minicpm_v46.run_metadata.json \
-    --output results/minicpm/OCRBench_v2_minicpm_v46_summary.json
+    --output results/minicpm/summary_minicpm_v46.txt
 ```
 
